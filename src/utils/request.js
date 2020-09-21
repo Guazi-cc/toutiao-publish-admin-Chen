@@ -11,5 +11,6 @@ const request = axios.create({
 })
 
 // 导出请求方法
+
 // 谁要使用，谁就导入该模块
 export default request
