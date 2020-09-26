@@ -38,7 +38,7 @@ import request from '@/utils/request'
 
 export default {
   name: 'LoginIndex',
-  comments: {},
+  components: {},
   props: {},
   data () {
     return {
