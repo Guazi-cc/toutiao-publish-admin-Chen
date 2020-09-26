@@ -34,8 +34,10 @@
           placeholder="请输入密码"
         ></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-checkbox v-model="checked">我已同意</el-checkbox>
+      <el-form-item prop="agree">
+        <el-checkbox
+          v-model="user.agree"
+        >我已同意</el-checkbox>
       </el-form-item>
       <el-form-item>
         <el-button
@@ -60,9 +62,9 @@ export default {
     return {
       user: {
         mobile: '',
-        code: ''
+        code: '',
+        agree: false // 是否同意协议
       },
-      checked: false,
       loginLoading: false,
       formRules: { // 表单验证规则配置
         // 要验证的数据名称: [规则列表]
@@ -74,6 +76,21 @@ export default {
         code: [
           { required: true, message: '验证码不能为空', trigger: 'change' },
           { pattern: /^\d{6}$/, message: '请输入正确的验证码', trigger: 'blur' }
+        ],
+        agree: [
+          {
+            // 自定义校验规则
+            // 验证通过: callback()
+            // 验证失败: callback(new Error('错误消息')
+            validator: (rule, value, callback) => {
+              if (value) {
+                callback()
+              } else {
+                callback(new Error('请同意用户协议!!'))
+              }
+            },
+            trigger: 'blur'
+          }
         ]
       }
     }
