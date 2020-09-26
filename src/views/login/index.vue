@@ -62,8 +62,8 @@ export default {
   data () {
     return {
       user: {
-        mobile: '',
-        code: '',
+        mobile: '13911111111',
+        code: '246810',
         agree: false // 是否同意协议
       },
       loginLoading: false,
@@ -136,6 +136,8 @@ export default {
           type: 'success'
         })
         this.loginLoading = false
+        // 跳转到首页
+        this.$router.push('/')
       }).catch(err => {
         console.log('登录失败', err)
         this.$message({
