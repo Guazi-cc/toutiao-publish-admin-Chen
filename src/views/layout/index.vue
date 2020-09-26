@@ -4,7 +4,7 @@
       class="aside"
       width="200px"
     >
-      <app-aside/>
+      <app-aside class="aside-menu"/>
     </el-aside>
     <el-container>
       <el-header class="header">Header</el-header>
@@ -53,5 +53,8 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
+}
+.aside-menu {
+  height: 100%;
 }
 </style>

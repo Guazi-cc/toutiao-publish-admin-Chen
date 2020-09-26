@@ -1,41 +1,38 @@
 <template>
   <el-menu
-    default-active="2"
-    class="el-menu-vertical-demo"
-    @open="handleOpen"
-    @close="handleClose"
-    background-color="#545c64"
+    default-active="/"
+    background-color="#002033"
     text-color="#fff"
-    active-text-color="#ffd04b">
-    <el-submenu index="1">
-      <template slot="title">
-        <i class="el-icon-location"></i>
-        <span>导航一</span>
-      </template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-    <el-menu-item index="2">
+    active-text-color="#ffd04b"
+    router
+  >
+    <el-menu-item index="/">
       <i class="el-icon-menu"></i>
-      <span slot="title">导航二</span>
+      <span slot="title">首页</span>
     </el-menu-item>
-    <el-menu-item index="3" disabled>
+    <el-menu-item index="/article">
       <i class="el-icon-document"></i>
-      <span slot="title">导航三</span>
+      <span slot="title">内容管理</span>
     </el-menu-item>
-    <el-menu-item index="4">
+    <el-menu-item index="/image">
+      <i class="el-icon-film"></i>
+      <span slot="title">素材管理</span>
+    </el-menu-item>
+    <el-menu-item index="/publish">
+      <i class="el-icon-toilet-paper"></i>
+      <span slot="title">发布文章</span>
+    </el-menu-item>
+    <el-menu-item index="/comment">
+      <i class="el-icon-chat-line-square"></i>
+      <span slot="title">评论管理</span>
+    </el-menu-item>
+    <el-menu-item index="/fans">
+      <i class="el-icon-user"></i>
+      <span slot="title">粉丝管理</span>
+    </el-menu-item>
+    <el-menu-item index="/setting">
       <i class="el-icon-setting"></i>
-      <span slot="title">导航四</span>
+      <span slot="title">个人设置</span>
     </el-menu-item>
   </el-menu>
 </template>
@@ -53,12 +50,7 @@ export default {
   created () {},
   mounted () {},
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
-    }
+
   }
 }
 </script>
