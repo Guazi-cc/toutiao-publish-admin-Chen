@@ -5,14 +5,30 @@
       每个表单项都要使用 el-form-item 组件包装
     -->
     <div class="login-head"></div>
-    <el-form class="login-form" ref="form" :model="user">
-      <el-form-item>
+    <!--
+      配置 form 表单验证
+      1. 必须给 el-form 绑定 model 为表单数据对象
+      2. 给需要验证的表单项 el-form-item 绑定 prop 属性
+         注意：prop 属性需要指定表单对象中的数据名称
+      3. 通过 el-form 的 rules属性配置验证规则
+
+      手动触发表单验证
+      1. 给 el-form 设置 ref 起个名字（随意，不可重复）
+      2. 通过 ref 获取 el-form 组件，调用组件的 validate 方法进行验证
+    -->
+    <el-form
+      class="login-form"
+      ref="login-form"
+      :model="user"
+      :rules="formRules"
+    >
+      <el-form-item prop="mobile">
         <el-input
           v-model="user.mobile"
           placeholder="请输入手机号"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="code">
         <el-input
           v-model="user.code"
           placeholder="请输入密码"
@@ -47,7 +63,19 @@ export default {
         code: ''
       },
       checked: false,
-      loginLoading: false
+      loginLoading: false,
+      formRules: { // 表单验证规则配置
+        // 要验证的数据名称: [规则列表]
+        mobile: [
+          { required: true, message: '手机号不能为空', trigger: 'blur' },
+          // pattern: 正则表达式
+          { pattern: /^1[3|5|6|7|8|9]\d{9}$/, message: '手机号格式不正确', trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: '验证码不能为空', trigger: 'change' },
+          { pattern: /^\d{6}$/, message: '请输入正确的验证码', trigger: 'blur' }
+        ]
+      }
     }
   },
   computed: {},
@@ -60,12 +88,20 @@ export default {
   methods: {
     onLogin () {
       // 获取表单数据（根据服务端接口需求）
-      const user = this.user
-
+      // const user = this.user
       // 表单验证
-
+      this.$refs['login-form'].validate((valid, err) => {
+        // 如果表单验证失败,停止提交请求
+        if (!valid) {
+          console.log(err) // 错误信息，不要也可
+          return
+        }
+        // 验证通过，请求登录
+        this.login()
+      })
+    },
+    login () {
       // 验证通过提交请求
-
       // 开启登陆中 Loading....
       this.loginLoading = true
 
@@ -73,7 +109,7 @@ export default {
         method: 'POST',
         url: '/mp/v1_0/authorizations',
         // data 用来设置 POST 请求体
-        data: user
+        data: this.user
       }).then(res => {
         console.log(res)
         this.$message({
