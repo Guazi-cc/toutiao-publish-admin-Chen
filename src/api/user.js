@@ -19,9 +19,10 @@ export const getUserProfile = () => {
     method: 'GET',
     url: '/mp/v1_0/user/profile',
     // 后端要求把需要授权的用户身份信息设置到请求头中
-    // axios 可以在header 中设置请求头
+    // axios 可以在headers 中设置请求头
+    // 通过这种方式来模拟 Tokend 暂时写死
     headers: {
-      // 属性名按照接口要求
+      // 属性名和值都要看后端接口要求
       Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzI5OTMxNTQsInVzZXJfaWQiOjEsInJlZnJlc2giOmZhbHNlLCJ2ZXJpZmllZCI6dHJ1ZX0.h1hYqk12azSSpeVaHuGF71167Ne6yx3A7ZKenYCsHkI'
     }
   })

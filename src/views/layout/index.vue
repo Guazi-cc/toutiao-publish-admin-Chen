@@ -14,8 +14,8 @@
         </div>
         <el-dropdown>
           <div class="avatar-wrap">
-            <img class="avatar" src="https://chen-test-01-img.oss-cn-beijing.aliyuncs.com/img/36dddafb-41db-402f-8caf-00e0fc5255ac.jpg" alt="image">
-            用户名
+            <img class="avatar" :src="user.photo" alt="image">
+            {{ user.name }}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </div>
           <el-dropdown-menu slot="dropdown">
@@ -42,7 +42,9 @@ export default {
   },
   props: {},
   data () {
-    return {}
+    return {
+      user: {} // 当前用户登陆信息
+    }
   },
   computed: {},
   watch: {},
@@ -56,7 +58,7 @@ export default {
     // 或者说，除了登录接口，其他接口都需要提供你的身份Token 才能获取数据
     loadUserProfile () {
       getUserProfile().then(res => {
-        console.log(res)
+        this.user = res.data.data
       })
     }
   }
