@@ -33,6 +33,7 @@
 
 <script>
 import AppAside from './components/aside'
+import { getUserProfile } from '@/api/user'
 
 export default {
   name: 'LayoutIndex',
@@ -45,10 +46,19 @@ export default {
   },
   computed: {},
   watch: {},
-  created () {},
+  created () {
+    // 组件初始化好，请求获取资料
+    this.loadUserProfile()
+  },
   mounted () {},
   methods: {
-
+    // 除了登录接口，其他所有接口都需要授权才能请求使用
+    // 或者说，除了登录接口，其他接口都需要提供你的身份Token 才能获取数据
+    loadUserProfile () {
+      getUserProfile().then(res => {
+        console.log(res)
+      })
+    }
   }
 }
 </script>
