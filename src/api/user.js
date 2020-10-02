@@ -15,6 +15,8 @@ export const login = data => {
 }
 // 获取用户信息
 export const getUserProfile = () => {
+  const user = JSON.parse(window.localStorage.getItem('user'))
+  console.log(user)
   return request({
     method: 'GET',
     url: '/mp/v1_0/user/profile',
@@ -23,7 +25,7 @@ export const getUserProfile = () => {
     // 通过这种方式来模拟 Tokend 暂时写死
     headers: {
       // 属性名和值都要看后端接口要求
-      Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzI5OTMxNTQsInVzZXJfaWQiOjEsInJlZnJlc2giOmZhbHNlLCJ2ZXJpZmllZCI6dHJ1ZX0.h1hYqk12azSSpeVaHuGF71167Ne6yx3A7ZKenYCsHkI'
+      Authorization: `Bearer ${user.token}`
     }
   })
 }
