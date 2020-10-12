@@ -2,14 +2,20 @@
   <el-container class="layout-container">
     <el-aside
       class="aside"
-      width="200px"
+      width="auto"
     >
-      <app-aside class="aside-menu"/>
+      <app-aside
+        :class="{'el-icon-s-fold':isCollapse, 'el-icon-s-unfold':!isCollapse}"
+        :is-collapse="isCollapse"
+      />
     </el-aside>
     <el-container>
       <el-header class="header">
         <div>
-          <i class="el-icon-s-fold"></i>
+          <i
+            class="el-icon-s-fold"
+            @click="isCollapse = !isCollapse"
+          ></i>
           <span>哈哈哈</span>
         </div>
         <el-dropdown>
@@ -43,7 +49,8 @@ export default {
   props: {},
   data () {
     return {
-      user: {} // 当前用户登陆信息
+      user: {}, // 当前用户登陆信息
+      isCollapse: false // 侧边栏的展示状态
     }
   },
   computed: {},
